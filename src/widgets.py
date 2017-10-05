@@ -2,7 +2,7 @@
 # -*- coding: utf8 -*
 
 from PyQt5.QtWidgets import (
-    QWidget, QFormLayout, QLabel, QProgressBar, QVBoxLayout, QHBoxLayout, QGridLayout,QPushButton)
+    QWidget, QFormLayout, QLabel, QProgressBar, QVBoxLayout, QHBoxLayout, QGridLayout, QPushButton)
 
 from PyQt5.QtGui import QFont
 
@@ -18,7 +18,7 @@ class InfoWidget(QWidget):
         super(InfoWidget, self).__init__()
 
         fbox = QFormLayout()
-        fbox.setHorizontalSpacing(10)
+        fbox.setHorizontalSpacing(25)
 
         self.lbl_lvl = QLabel('0')
         self.lbl_xp = QLabel('0')
@@ -26,11 +26,11 @@ class InfoWidget(QWidget):
         self.lbl_dps = QLabel('0')
         self.lbl_armor = QLabel('0')
 
-        lbl_lvl_name = QLabel('Level')
-        lbl_xp_name = QLabel('XP')
-        lbl_gold_name = QLabel('Gold')
-        lbl_dps_name = QLabel('DPS')
-        lbl_armor_name = QLabel('Armor')
+        lbl_lvl_name = QLabel('Level:')
+        lbl_xp_name = QLabel('XP:')
+        lbl_gold_name = QLabel('Gold:')
+        lbl_dps_name = QLabel('DPS:')
+        lbl_armor_name = QLabel('Armor:')
 
         fbox.addRow(lbl_lvl_name, self.lbl_lvl)
         fbox.addRow(lbl_xp_name, self.lbl_xp)
@@ -48,14 +48,14 @@ class InfoWidget(QWidget):
             time_to_lvl = '∞'
         self.lbl_lvl.setToolTip('Next level in ≈ {}s'.format(time_to_lvl))
 
-        self.lbl_xp.setText('{:.2f}/{:.0f}'.format(var.xp, var.next_lvl()))
-        self.lbl_xp.setToolTip('{:.3f} xp/s'.format(var.xp_per_tick()))
+        self.lbl_xp.setText('{:g}/{:g}'.format(var.xp, var.next_lvl()))
+        self.lbl_xp.setToolTip('{:g} xp/s'.format(var.xp_per_tick()))
 
-        self.lbl_gold.setText('{:.2f}'.format(var.gold))
-        self.lbl_gold.setToolTip('{:.3f} gold/s'.format(var.gold_per_tick()))
+        self.lbl_gold.setText('{:g}'.format(var.gold))
+        self.lbl_gold.setToolTip('{:g} gold/s'.format(var.gold_per_tick()))
 
-        self.lbl_dps.setText('{:.2f}'.format(var.dps()))
-        self.lbl_armor.setText('{:.2f}'.format(var.armor()))
+        self.lbl_dps.setText('{:g}'.format(var.dps()))
+        self.lbl_armor.setText('{:g}'.format(var.armor()))
 
 
 class ProgressionWidget(QWidget):
@@ -81,7 +81,6 @@ class ProgressionWidget(QWidget):
 
         self.lbl_gold = QLabel('Gold: {gold}'.format(gold=0))
 
-
         hbox.addWidget(self.lbl_lvl)
         hbox.addWidget(self.bar_xp)
         hbox.addWidget(self.lbl_skills_points)
@@ -98,13 +97,12 @@ class ProgressionWidget(QWidget):
 
         self.lbl_lvl.setText(str(var.lvl))
         if var.skill_points > 0:
-            points= var.skill_points
+            points = var.skill_points
             self.lbl_skills_points.setText('+')
             self.lbl_skills_points.setToolTip(f'{points} skill points available')
         else:
             self.lbl_skills_points.setText('')
             self.lbl_skills_points.setToolTip('')
-
 
         self.lbl_gold.setText('Gold: {gold:.1f}'.format(gold=var.gold))
 
@@ -115,19 +113,20 @@ class EquippedGearWidget(QWidget):
         super(EquippedGearWidget, self).__init__()
 
         form = QFormLayout()
+        form.setHorizontalSpacing(25)
 
         self.lbl_weapon = QLabel('')
         lbl_weapon_name = QLabel('Weapon:')
         lbl_weapon_name.setFont(QFont('Helvetica', 12))
-        
+
         self.lbl_torso = QLabel('')
         lbl_torso_name = QLabel('Torso:')
         lbl_torso_name.setFont(QFont('Helvetica', 12))
-        
+
         self.lbl_head = QLabel('')
         lbl_head_name = QLabel('Head:')
         lbl_head_name.setFont(QFont('Helvetica', 12))
-        
+
         self.lbl_feet = QLabel('')
         lbl_feet_name = QLabel('Feet:')
         lbl_feet_name.setFont(QFont('Helvetica', 12))
@@ -162,7 +161,7 @@ class EquippedGearWidget(QWidget):
 
         name = gear['name']
         tt = gear['tt']
-        text = f"<h3>{name}</h3><h2>{value}</h2><em>{tt}</em>"
+        text = f'<h3>{name}</h3><h2>{value:.3g}</h2><em>{tt}</em>'
 
         return text
 
@@ -179,7 +178,6 @@ class BuyGearWidget(QWidget):
         vbox.addStretch()
 
         self.setLayout(vbox)
-
 
     def populate(self, var):
 
@@ -214,26 +212,26 @@ class GearButtonWidget(QWidget):
         hbox = QHBoxLayout()
 
         lbl_name = QLabel(self.name)
-        lbl_name.setFont(QFont('Helvetica', 14))
-
+        lbl_name.setFont(QFont('Helvetica', 13))
+        lbl_name.setWordWrap(True)
 
         buy_btn = QPushButton('buy ({price})'.format(price=self.gear['price']), self)
         buy_btn.pressed.connect(self.buy)
 
         self.setToolTip(self.tt())
 
-        #hbox.addStretch()
+        # hbox.addStretch()
         hbox.addWidget(buy_btn)
-        #hbox.addStretch()
+        # hbox.addStretch()
 
         vbox.addWidget(lbl_name)
         vbox.addLayout(hbox)
 
         self.setLayout(vbox)
-        self.setMaximumWidth(120)
-        self.setMinimumWidth(120)
-        self.setMinimumHeight(80)
-        self.setMaximumHeight(80)
+        self.setMaximumWidth(128)
+        self.setMinimumWidth(128)
+        self.setMinimumHeight(128)
+        self.setMaximumHeight(128)
 
     def tt(self):
         text = ''
@@ -260,8 +258,8 @@ class GearButtonWidget(QWidget):
             g = {'name': self.name, 'damage': self.gear['damage'], 'speed': self.gear['speed'], 'tt': self.gear['tt']}
             self.var.weapon = g.copy()
 
-            #remove offhand item if weapon is two handed
-            if self.gear['type'] == '2h':
+            # remove offhand item if weapon is two handed
+            if '2h' in self.gear['subtype']:
                 self.var.offhand = None
 
         else:
@@ -282,7 +280,7 @@ class GearButtonWidget(QWidget):
 class BuySkillsWidget(QWidget):
 
     def __init__(self):
-        super(BuySkillsWidget, self).__init__()        
+        super(BuySkillsWidget, self).__init__()
 
         self.grid = QGridLayout()
         vbox = QVBoxLayout()
@@ -290,7 +288,6 @@ class BuySkillsWidget(QWidget):
         vbox.addStretch()
 
         self.setLayout(vbox)
-
 
     def populate(self, var):
 
@@ -344,7 +341,6 @@ class SkillItemWidget(QWidget):
             btn_add.pressed.connect(self.buy)
             hbox.addWidget(btn_add)
 
-
         vbox.addWidget(lbl_name)
         vbox.addLayout(hbox)
 
@@ -367,7 +363,3 @@ class SkillItemWidget(QWidget):
         else:
             # add skill
             self.var.skills[self.name] = {'lvl': 1, 'value': 1}
-
-
-
-

@@ -5,6 +5,7 @@ from PyQt5.QtWidgets import QTabWidget, QVBoxLayout, QHBoxLayout, QWidget
 
 from widgets import InfoWidget, ProgressionWidget, BuyGearWidget, BuySkillsWidget, EquippedGearWidget
 
+
 class _GameVar(object):
 
     ''' Helper class to store game variables'''
@@ -30,13 +31,11 @@ class _GameVar(object):
 
         self.skills = {}
 
-
     def xp_per_tick(self):
         return 1 * self.dps() * self.xp_boost() * self.armor()
 
     def gold_per_tick(self):
         return 0.5 * self.dps() * self.gold_boost() * self.armor()
-
 
     def tick(self):
         self.timestamp += 1
@@ -44,8 +43,7 @@ class _GameVar(object):
         self.gold += self.gold_per_tick()
 
     def next_lvl(self):
-        return ((self.lvl + 1) ** 3.5) * 100
-
+        return int(((self.lvl + 1) ** 3.5) * 100)
 
     def lvl_up(self):
         self.xp = self.xp - self.next_lvl()
@@ -53,15 +51,14 @@ class _GameVar(object):
         self.has_leveled = True
         self.skill_points += 1
 
-
     def dps(self):
-        #calculate damage bonus based on skills
+        # calculate damage bonus based on skills
         base_dps = self.weapon['damage'] * self.weapon['speed']
         dps = base_dps
 
         if 'Strength' in self.skills:
             dps += base_dps * (self.skills['Strength']['value'] / 100)
-            
+
         return dps
 
     def armor(self):
@@ -72,13 +69,13 @@ class _GameVar(object):
         armor = base_armor
 
         if 'Dexterity' in self.skills:
-            armor += base_armor * (self.skills['Dexterity']['value'] / 100)           
+            armor += base_armor * (self.skills['Dexterity']['value'] / 100)
 
         return armor
 
     def xp_boost(self):
         xp_boost = 1
-            
+
         if 'Intelligence' in self.skills:
             xp_boost += 1 * (self.skills['Intelligence']['value'] / 100)
 
@@ -90,7 +87,6 @@ class _GameVar(object):
             if 'gold_boost' in skill:
                 gold_boost *= skill['gold_boost']
         return gold_boost
-
 
 
 class Game(object):
@@ -111,29 +107,27 @@ class Game(object):
         central_widget = QWidget()
 
         vbox = QVBoxLayout()
+        char_hbox = QHBoxLayout()
+        char_vbox = QVBoxLayout()
 
         self.progress_widget = ProgressionWidget()
-
         self.buy_skills_widget = BuySkillsWidget()
         self.buy_gear_widget = BuyGearWidget()
         self.equipped_gear_widget = EquippedGearWidget()
         self.info_widget = InfoWidget()
 
-        gear_tab = QWidget()
-        gear_tab_hlayout = QHBoxLayout()
-        gear_tab_vlayout = QVBoxLayout()
-        gear_tab_hlayout.addWidget(self.buy_gear_widget)
-        gear_tab_vlayout.addWidget(self.equipped_gear_widget)
-        gear_tab_vlayout.addWidget(self.info_widget)
-        gear_tab_hlayout.addLayout(gear_tab_vlayout)
-        gear_tab.setLayout(gear_tab_hlayout)
-
         self.tabs = QTabWidget()
-        self.tabs.addTab(gear_tab, "Gear")
+        self.tabs.addTab(self.buy_gear_widget, "Gear")
         self.tabs.addTab(self.buy_skills_widget, "Skills")
 
+        char_vbox.addWidget(self.equipped_gear_widget)
+        char_vbox.addWidget(self.info_widget)
+
+        char_hbox.addLayout(char_vbox)
+        char_hbox.addWidget(self.tabs)
+
         vbox.addWidget(self.progress_widget)
-        vbox.addWidget(self.tabs)
+        vbox.addLayout(char_hbox)
 
         central_widget.setLayout(vbox)
         self.w.setCentralWidget(central_widget)
@@ -171,6 +165,6 @@ class Game(object):
             # Refresh after buying a skill point
             self.var.has_bought_skill = False
             self.buy_skills_widget.populate(self.var)
-    
+
         self.progress_widget.update(self.var)
         self.info_widget.update(self.var)
