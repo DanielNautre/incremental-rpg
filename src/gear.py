@@ -12,8 +12,16 @@ gear = {
 }
 
 
-def remove_gear(name):
-    del gear[name]
+def remove_gear(bought_gear):
+    # remove bought gear and all inferior items
+    tbd = [bought_gear]
+    for name, stuff in gear.items():
+        if stuff['type'] == gear[bought_gear]['type']:
+            if stuff['price'] < gear[bought_gear]['price']:
+                tbd.append(name)
+
+    for name in tbd:
+        del gear[name]
 
 
 def get_available_gear(lvl):
