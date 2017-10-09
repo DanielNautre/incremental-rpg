@@ -12,6 +12,29 @@ from gear import get_available_gear, remove_gear
 from skills import get_available_skills
 
 
+def s_to_string(s):
+    if s > 31535999:
+        m, s = divmod(s, 60)
+        h, m = divmod(m, 60)
+        d, h = divmod(h, 24)
+        y, d = divmod(d, 365)
+        return f'{y} years, {d} days, {h} hours, {m} minutes and {s} seconds'
+    if s > 86399:
+        m, s = divmod(s, 60)
+        h, m = divmod(m, 60)
+        d, h = divmod(h, 24)
+        return f'{d} days, {h} hours, {m} minutes and {s} seconds'
+    if s > 3599:
+        m, s = divmod(s, 60)
+        h, m = divmod(m, 60)
+        return f'{h} hours, {m} minutes and {s} seconds'
+    if s > 59:
+        m, s = divmod(s, 60)
+        return f'{m} minutes and {s} seconds'
+
+    return f'{s} seconds'
+
+
 class InfoWidget(QWidget):
 
     def __init__(self):
@@ -43,10 +66,11 @@ class InfoWidget(QWidget):
     def update(self, var):
         self.lbl_lvl.setText(str(var.lvl))
         if var.xp_per_tick() > 0:
-            time_to_lvl = int((var.next_lvl() - var.xp) / var.xp_per_tick())
+            s_to_level = int((var.next_lvl() - var.xp) / var.xp_per_tick())
+            time_to_lvl = s_to_string(s_to_level)
         else:
             time_to_lvl = '∞'
-        self.lbl_lvl.setToolTip('Next level in ≈ {}s'.format(time_to_lvl))
+        self.lbl_lvl.setToolTip('Next level in ≈ {}'.format(time_to_lvl))
 
         self.lbl_xp.setText('{:g}/{:g}'.format(var.xp, var.next_lvl()))
         self.lbl_xp.setToolTip('{:g} xp/s'.format(var.xp_per_tick()))
