@@ -156,10 +156,15 @@ class EquippedGearWidget(QWidget):
         lbl_feet_name = QLabel('Feet:')
         lbl_feet_name.setFont(QFont('Helvetica', 12))
 
+        self.lbl_offhand = QLabel('')
+        lbl_offhand_name = QLabel('Offhand:')
+        lbl_offhand_name.setFont(QFont('Helvetica', 12))
+
         form.addRow(lbl_weapon_name, self.lbl_weapon)
         form.addRow(lbl_head_name, self.lbl_head)
         form.addRow(lbl_torso_name, self.lbl_torso)
         form.addRow(lbl_feet_name, self.lbl_feet)
+        form.addRow(lbl_offhand_name, self.lbl_offhand)
 
 
         self.setLayout(form)
@@ -176,6 +181,13 @@ class EquippedGearWidget(QWidget):
 
         self.lbl_feet.setText(var.feet['name'])
         self.lbl_feet.setToolTip(self.tt(var.feet))
+
+        if var.offhand:
+            self.lbl_offhand.setText(var.offhand['name'])
+            self.lbl_offhand.setToolTip(self.tt(var.offhand))
+        else:
+            self.lbl_offhand.setText('')
+            self.lbl_offhand.setToolTip('')
 
     def tt(self, gear):
         text = ''
