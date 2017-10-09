@@ -61,11 +61,17 @@ class _GameVar(object):
 
         return dps
 
-    def armor(self):
+    def raw_armor(self):
         base_armor = self.head['armor'] + self.torso['armor'] + self.feet['armor']
         if self.offhand:
             base_armor += self.offhand['armor']
 
+        return base_armor
+
+
+    def armor(self):
+
+        base_armor = self.raw_armor()
         armor = base_armor
 
         if 'Dexterity' in self.skills:

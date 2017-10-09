@@ -80,6 +80,7 @@ class InfoWidget(QWidget):
 
         self.lbl_dps.setText('{:g}'.format(var.dps()))
         self.lbl_armor.setText('{:g}'.format(var.armor()))
+        self.lbl_armor.setToolTip('Raw value: {:g}'.format(var.raw_armor()))
 
 
 class ProgressionWidget(QWidget):
