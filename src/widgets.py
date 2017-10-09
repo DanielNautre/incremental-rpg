@@ -219,7 +219,7 @@ class BuyGearWidget(QWidget):
             self.grid.addWidget(GearButtonWidget(name, g, var), y, x)
             self.grid.setAlignment(Qt.AlignLeft)
             x += 1
-            if x == 3:
+            if x == 5:
                 y += 1
                 x = 0
 
