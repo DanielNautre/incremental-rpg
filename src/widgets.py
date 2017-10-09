@@ -267,7 +267,7 @@ class GearButtonWidget(QWidget):
 
         name = self.name
         tt = self.gear['tt']
-        text = f"<h3>{name}</h3><h2>{value}</h2><em>{tt}</em>"
+        text = f"<h3>{name}</h3><h2>{value:.3g}</h2><em>{tt}</em>"
 
         return text
 
