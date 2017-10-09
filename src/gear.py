@@ -3,15 +3,23 @@
 
 
 gear = {
-    'Stick': {'type': 'weapon', 'subtype': 'mace', 'lvl': 1, 'price': 0, 'damage': 0.3, 'speed': 1.4, 'tt': 'A small and fragile stick found on the ground'},
+    'Stick': {'type': 'weapon', 'subtype': 'mace', 'lvl': 1, 'price': 0, 'damage': 0.4, 'speed': 1.4, 'tt': 'A small and fragile stick found on the ground'},
     'Sandals': {'type': 'feet', 'lvl': 1, 'price': 5, 'armor': 0.5, 'tt': 'Overpriced plastics thongs. what\'s plastic anyway ?'},
     'Gomina': {'type': 'head', 'lvl': 1, 'price': 15, 'armor': 0.5, 'tt': 'From a distance, it almost looks like you\re wearing an helmet'},
     'Potato sac': {'type': 'torso', 'lvl': 1, 'price': 20, 'armor': 1, 'tt': 'Better than nothing I suppose.'},
     'Bandana': {'type': 'head', 'lvl': 1, 'price': 55, 'armor': 1, 'tt': 'Fashionnable piece of cloth with a pearsley pattern printed on it, thin but good looking'},
-    'Dragonforce T-shirt': {'type': 'torso', 'lvl': 1, 'price': 65, 'armor': 1.5, 'tt': 'Nothing is more medieval than a Dragonforce T-shirt.'},
+    'Dragonforce T-shirt': {'type': 'torso', 'lvl': 1, 'price': 65, 'armor': 1.7, 'tt': 'Nothing is more medieval than a Dragonforce T-shirt.'},
     'Club': {'type': 'weapon', 'subtype': 'mace', 'lvl': 1, 'price': 70, 'damage': 1, 'speed': 1.1, 'tt': 'A solid piece of oak wood'},
-    'Worn Shoes': {'type': 'feet', 'lvl': 1, 'price': 95, 'armor': 1.4, 'tt': 'They smell like bad cheese but they provide some protection'},
-    'Dagger': {'type': 'weapon', 'subtype': 'sword', 'lvl': 2, 'price': 250, 'damage': 1.2, 'speed': 1.5, 'tt': 'A quick and deadly weapon, if you can get close enough'}
+    'Worn Shoes': {'type': 'feet', 'lvl': 1, 'price': 95, 'armor': 1.2, 'tt': 'They smell like bad cheese but they provide some protection'},
+    'Dagger': {'type': 'weapon', 'subtype': 'sword', 'lvl': 2, 'price': 260, 'damage': 1.2, 'speed': 1.5, 'tt': 'A quick and deadly weapon, if you can get close enough'},
+    'Cap': {'type': 'head', 'lvl': 2, 'price': 285, 'armor': 2, 'tt': 'A strange hat with the runes NY inscribed on it, this has to be a powerful ancient artifact'},
+    'Cloth Tunic': {'type': 'torso', 'lvl': 2, 'price': 300, 'armor': 2.5, 'tt': 'Pink was not your first choice but they didn¨\'t have your size in crimson red anymore'},
+    'Leather Boots': {'type': 'feet', 'lvl': 2, 'price': 315, 'armor': 1.8, 'tt': 'You might get some blisters, but you sure got some style'},
+    'Hand Axe': {'type': 'weapon', 'subtype': 'axe', 'lvl': 2, 'price': 450, 'damage': 2.2, 'speed': 1.1, 'tt': 'As long as you\'re combatting logs, you\'ll be fine'},
+    'Rusted Greaves': {'type': 'feet', 'lvl': 2, 'price': 500, 'armor': 2.4, 'tt': 'Don\'t forget to oil them or the squeal is gonna drive you mad'},
+    'Leather Doublet': {'type': 'torso', 'lvl': 2, 'price': 570, 'armor': 3.3, 'tt': 'Let\'s just hope they won\'t target your arms'},
+    'Short Sword': {'type': 'weapon', 'subtype': 'sword', 'lvl': 3, 'price': 1070, 'damage': 2.7, 'speed': 1.4, 'tt': 'A fine steel weapon'},
+    
 }
 
 
