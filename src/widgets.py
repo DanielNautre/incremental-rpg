@@ -347,20 +347,23 @@ class SkillItemWidget(QWidget):
         lbl_name = QLabel(self.name)
         lbl_name.setFont(QFont('Helvetica', 13))
 
+
         if self.name in self.var.skills:
             current_level = self.var.skills[self.name]['lvl']
+            skill_next_lvl = (current_level * self.skill['lvl_step']) + self.skill['lvl']
             desc = self.skill['desc'].format(value=self.var.skills[self.name]['value'])
             tt = self.skill['tt']
             text = f'<p>{desc}</p><p><i>{tt}</i></p>'
         else:
             current_level = 0
+            skill_next_lvl = self.skill['lvl']
             text = 'You do not have that skill yet'
 
         lbl_lvl = QLabel(str(current_level))
         lbl_lvl.setFont(QFont('Helvetica', 18))
 
         hbox.addWidget(lbl_lvl)
-        if self.var.skill_points > 0:
+        if self.var.skill_points > 0 and self.var.lvl >= skill_next_lvl:
             btn_add = QPushButton('+', self)
             btn_add.pressed.connect(self.buy)
             hbox.addWidget(btn_add)
@@ -382,8 +385,8 @@ class SkillItemWidget(QWidget):
         if self.name in self.var.skills:
             # increase skill level
             self.var.skills[self.name]['lvl'] += 1
-            self.var.skills[self.name]['value'] += 1
+            self.var.skills[self.name]['value'] += self.skill['step']
 
         else:
             # add skill
-            self.var.skills[self.name] = {'lvl': 1, 'value': 1}
+            self.var.skills[self.name] = {'lvl': 1, 'value': self.skill['step']}
