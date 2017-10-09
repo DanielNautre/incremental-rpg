@@ -58,6 +58,8 @@ class _GameVar(object):
 
         if 'Strength' in self.skills:
             dps += base_dps * (self.skills['Strength']['value'] / 100)
+        if 'Fiery Weapon' in self.skills:
+            dps += base_dps * (self.skills['Fiery Weapon']['value'] / 100)
 
         return dps
 
@@ -76,6 +78,8 @@ class _GameVar(object):
 
         if 'Dexterity' in self.skills:
             armor += base_armor * (self.skills['Dexterity']['value'] / 100)
+        if 'Mana Shield' in self.skills:
+            armor += base_armor * (self.skills['Mana Shield']['value'] / 100)
 
         return armor
 
