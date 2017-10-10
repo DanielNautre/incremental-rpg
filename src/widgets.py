@@ -228,7 +228,7 @@ class BuyGearWidget(QWidget):
         x, y = (0, 0)
 
         for name, g in gear.items():
-            if 'offhand' in g['type'] and '2h' in var.weapon['subtype']:
+            if 'offhand' in g['type'] and '2h' in var.weapon['type']:
                 # don't display shields if 2 hand weapon is equipped
                 continue
             self.grid.addWidget(GearButtonWidget(name, g, var), y, x)
@@ -295,7 +295,7 @@ class GearButtonWidget(QWidget):
         remove_gear(self.name)
 
         if 'damage' in self.gear:
-            g = {'name': self.name, 'damage': self.gear['damage'], 'speed': self.gear['speed'], 'tt': self.gear['tt']}
+            g = {'name': self.name, 'type': self.gear['subtype'], 'damage': self.gear['damage'], 'speed': self.gear['speed'], 'tt': self.gear['tt']}
             self.var.weapon = g.copy()
 
             # remove offhand item if weapon is two handed

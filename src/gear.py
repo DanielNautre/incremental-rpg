@@ -14,6 +14,7 @@ gear = {
     'Dagger': {'type': 'weapon', 'subtype': 'sword', 'lvl': 2, 'price': 260, 'damage': 1.2, 'speed': 1.5, 'tt': 'A quick and deadly weapon, if you can get close enough'},
     'Cap': {'type': 'head', 'lvl': 2, 'price': 285, 'armor': 2, 'tt': 'A strange hat with the runes NY inscribed on it, this has to be a powerful ancient artifact'},
     'Cloth Tunic': {'type': 'torso', 'lvl': 2, 'price': 300, 'armor': 2.5, 'tt': 'Pink was not your first choice but they didn¨\'t have your size in crimson red anymore'},
+    'Buckler': {'type': 'offhand', 'lvl': 1, 'price': 310, 'armor': 1.5, 'tt': 'It\'s mostly just a piece of wood with a handle on the back'},
     'Leather Boots': {'type': 'feet', 'lvl': 2, 'price': 315, 'armor': 1.8, 'tt': 'Shiny, shiny, shiny boots of leather'},
     'Hand Axe': {'type': 'weapon', 'subtype': 'axe', 'lvl': 2, 'price': 450, 'damage': 2.2, 'speed': 1.1, 'tt': 'As long as you\'re combatting logs, you\'ll be fine'},
     'Rusted Greaves': {'type': 'feet', 'lvl': 2, 'price': 500, 'armor': 2.4, 'tt': 'Don\'t forget to oil them or the squeal is gonna drive you mad'},
