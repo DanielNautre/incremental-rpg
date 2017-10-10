@@ -19,7 +19,7 @@ class _GameVar(object):
         self.gold = 0
         self.skill_points = 0
 
-        self.weapon = {'name': 'Hands', 'damage': 0.1, 'speed': 0, 'tt': 'Just your bare hands'}
+        self.weapon = {'name': 'Hands', 'type': 'hands', 'damage': 0.1, 'speed': 0, 'tt': 'Just your bare hands'}
         self.head = {'name': 'Hair', 'armor': 0.1, 'tt': 'Long hair does provides some protection against direct hits and it soaks some of the blood up to reduce the mess'}
         self.torso = {'name': 'Manly chesthair', 'armor': 0.1, 'tt': 'Your mane is sure to blunt your foes swords'}
         self.feet = {'name': 'Feet', 'armor': 0.0, 'tt': 'Careful, don\'t walk on Lego'}
