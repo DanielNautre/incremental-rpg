@@ -43,46 +43,23 @@ class InfoWidget(QWidget):
         super(InfoWidget, self).__init__()
 
         fbox = QFormLayout()
-        fbox.setHorizontalSpacing(25)
 
-        self.lbl_lvl = QLabel('0')
-        self.lbl_xp = QLabel('0')
-        self.lbl_gold = QLabel('0')
-        self.lbl_dps = QLabel('0')
-        self.lbl_armor = QLabel('0')
+        self.lbl_xp = QLabel('')
+        self.lbl_xp.setFont(QFont('Helvetica', 13))
+        self.lbl_gold = QLabel('')
+        self.lbl_gold.setFont(QFont('Helvetica', 13))
 
-        lbl_lvl_name = QLabel('Level:')
-        lbl_xp_name = QLabel('XP:')
-        lbl_gold_name = QLabel('Gold:')
-        lbl_dps_name = QLabel('DPS:')
-        lbl_armor_name = QLabel('Armor:')
-
-        fbox.addRow(lbl_lvl_name, self.lbl_lvl)
-        fbox.addRow(lbl_xp_name, self.lbl_xp)
-        fbox.addRow(lbl_gold_name, self.lbl_gold)
-        fbox.addRow(lbl_dps_name, self.lbl_dps)
-        fbox.addRow(lbl_armor_name, self.lbl_armor)
+        fbox.addRow(self.lbl_xp)
+        fbox.addRow(self.lbl_gold)
 
         self.setLayout(fbox)
 
     def update(self, var):
-        self.lbl_lvl.setText(str(var.lvl))
-        if var.xp_per_tick() > 0:
-            s_to_level = int((var.next_lvl() - var.xp) / var.xp_per_tick())
-            time_to_lvl = s_to_string(s_to_level)
-        else:
-            time_to_lvl = '∞'
-        self.lbl_lvl.setToolTip('Next level in ≈ {}'.format(time_to_lvl))
+        # self.lbl_xp.setText('{:g}/{:g}'.format(var.xp, var.next_lvl()))
+        self.lbl_xp.setText('{:g} xp/s'.format(var.xp_per_tick()))
 
-        self.lbl_xp.setText('{:g}/{:g}'.format(var.xp, var.next_lvl()))
-        self.lbl_xp.setToolTip('{:g} xp/s'.format(var.xp_per_tick()))
-
-        self.lbl_gold.setText('{:g}'.format(var.gold))
-        self.lbl_gold.setToolTip('{:g} gold/s'.format(var.gold_per_tick()))
-
-        self.lbl_dps.setText('{:g}'.format(var.dps()))
-        self.lbl_armor.setText('{:g}'.format(var.armor()))
-        self.lbl_armor.setToolTip('Raw value: {:g}'.format(var.raw_armor()))
+        # self.lbl_gold.setText('{:g}'.format(var.gold))
+        self.lbl_gold.setText('{:g} gold/s'.format(var.gold_per_tick()))
 
 
 class ProgressionWidget(QWidget):
@@ -102,19 +79,19 @@ class ProgressionWidget(QWidget):
         self.bar_xp.setStyleSheet("::chunk {background-color: yellow}")
 
         self.lbl_lvl = QLabel('0')
-        self.lbl_lvl.setFont(QFont('Helvetica', 20))
+        self.lbl_lvl.setFont(QFont('Helvetica', 22))
 
         self.lbl_skills_points = QLabel('')
-        self.lbl_skills_points.setFont(QFont('Helvetica', 20))
+        self.lbl_skills_points.setFont(QFont('Helvetica', 22))
 
-        #self.lbl_gold = QLabel('Gold: {gold}'.format(gold=0))
+        self.lbl_gold = QLabel('Gold: {gold}'.format(gold=0))
         self.lbl_action = QLabel()
 
         hbox.addWidget(self.lbl_lvl)
         hbox.addWidget(self.bar_xp)
         hbox.addWidget(self.lbl_skills_points)
 
-        #vbox.addWidget(self.lbl_gold)
+        action_h_box.addWidget(self.lbl_gold)
         action_h_box.addStretch()
         action_h_box.addWidget(self.lbl_action)
 
@@ -127,6 +104,13 @@ class ProgressionWidget(QWidget):
         self.bar_xp.setMaximum(var.next_lvl())
         self.bar_xp.setValue(var.xp)
         self.bar_xp.setToolTip('{xp:g}/{next:g}'.format(xp=var.xp, next=var.next_lvl()))
+        if var.xp_per_tick() > 0:
+            s_to_level = int((var.next_lvl() - var.xp) / var.xp_per_tick())
+            time_to_lvl = s_to_string(s_to_level)
+        else:
+            time_to_lvl = '∞'
+        self.bar_xp.setFormat('Next level in ≈ {}'.format(time_to_lvl))
+        self.bar_xp.setAlignment(Qt.AlignCenter)
 
 
         self.lbl_lvl.setText(str(var.lvl))
@@ -138,7 +122,7 @@ class ProgressionWidget(QWidget):
             self.lbl_skills_points.setText('')
             self.lbl_skills_points.setToolTip('')
 
-        #self.lbl_gold.setText('Gold: {gold:.1f}'.format(gold=var.gold))
+        self.lbl_gold.setText('Gold: {gold:g}'.format(gold=var.gold))
 
     def update_action(self, var):
         if not var.timestamp % 20:
@@ -155,29 +139,42 @@ class EquippedGearWidget(QWidget):
 
         self.lbl_weapon = QLabel('')
         lbl_weapon_name = QLabel('Weapon:')
-        lbl_weapon_name.setFont(QFont('Helvetica', 12))
+        lbl_weapon_name.setFont(QFont('Helvetica', 10))
 
         self.lbl_torso = QLabel('')
         lbl_torso_name = QLabel('Torso:')
-        lbl_torso_name.setFont(QFont('Helvetica', 12))
+        lbl_torso_name.setFont(QFont('Helvetica', 10))
 
         self.lbl_head = QLabel('')
         lbl_head_name = QLabel('Head:')
-        lbl_head_name.setFont(QFont('Helvetica', 12))
+        lbl_head_name.setFont(QFont('Helvetica', 10))
 
         self.lbl_feet = QLabel('')
         lbl_feet_name = QLabel('Feet:')
-        lbl_feet_name.setFont(QFont('Helvetica', 12))
+        lbl_feet_name.setFont(QFont('Helvetica', 10))
 
         self.lbl_offhand = QLabel('')
         lbl_offhand_name = QLabel('Offhand:')
-        lbl_offhand_name.setFont(QFont('Helvetica', 12))
+        lbl_offhand_name.setFont(QFont('Helvetica', 10))
+
+        self.lbl_dps = QLabel('')
+        lbl_dps_name = QLabel('DPS:')
+        lbl_dps_name.setFont(QFont('Helvetica', 10))
+
+        self.lbl_armor = QLabel('')
+        lbl_armor_name = QLabel('Armor:')
+        lbl_armor_name.setFont(QFont('Helvetica', 10))
+
+
 
         form.addRow(lbl_weapon_name, self.lbl_weapon)
         form.addRow(lbl_head_name, self.lbl_head)
         form.addRow(lbl_torso_name, self.lbl_torso)
         form.addRow(lbl_feet_name, self.lbl_feet)
         form.addRow(lbl_offhand_name, self.lbl_offhand)
+        form.addRow(QLabel())
+        form.addRow(lbl_dps_name, self.lbl_dps)
+        form.addRow(lbl_armor_name, self.lbl_armor)
 
 
         self.setLayout(form)
@@ -201,6 +198,10 @@ class EquippedGearWidget(QWidget):
         else:
             self.lbl_offhand.setText('')
             self.lbl_offhand.setToolTip('')
+
+        self.lbl_dps.setText('{:g}'.format(var.dps()))
+        self.lbl_armor.setText('{:g}'.format(var.armor()))
+        self.lbl_armor.setToolTip('Raw value: {:g}'.format(var.raw_armor()))
 
     def tt(self, gear):
         text = ''

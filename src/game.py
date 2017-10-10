@@ -132,6 +132,8 @@ class Game(object):
 
         char_vbox.addWidget(self.equipped_gear_widget)
         char_vbox.addWidget(self.info_widget)
+        char_vbox.addStretch()
+
 
         char_hbox.addLayout(char_vbox)
         char_hbox.addWidget(self.tabs)
