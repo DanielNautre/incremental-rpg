@@ -95,14 +95,14 @@ class ProgressionWidget(QWidget):
         self.bar_xp.setMinimum(0)
         self.bar_xp.setMaximum(1)
         self.bar_xp.setValue(0)
-        self.bar_xp.setFormat('Experience: {xp:.1f}'.format(xp=0))
+        self.bar_xp.setFormat('')
         self.bar_xp.setStyleSheet("::chunk {background-color: yellow}")
 
         self.lbl_lvl = QLabel('0')
-        self.lbl_lvl.setFont(QFont('Helvetica', 18))
+        self.lbl_lvl.setFont(QFont('Helvetica', 20))
 
         self.lbl_skills_points = QLabel('')
-        self.lbl_skills_points.setFont(QFont('Helvetica', 18))
+        self.lbl_skills_points.setFont(QFont('Helvetica', 20))
 
         self.lbl_gold = QLabel('Gold: {gold}'.format(gold=0))
 
@@ -118,7 +118,8 @@ class ProgressionWidget(QWidget):
     def update(self, var):
         self.bar_xp.setMaximum(var.next_lvl())
         self.bar_xp.setValue(var.xp)
-        self.bar_xp.setFormat('Experience: {xp:.1f}'.format(xp=var.xp))
+        self.bar_xp.setToolTip('{xp:g}/{next:g}'.format(xp=var.xp, next=var.next_lvl()))
+
 
         self.lbl_lvl.setText(str(var.lvl))
         if var.skill_points > 0:
