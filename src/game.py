@@ -43,7 +43,7 @@ class _GameVar(object):
         self.gold += self.gold_per_tick()
 
     def next_lvl(self):
-        return int(((self.lvl + 1) ** 5) * 25)
+        return int(((self.lvl + 1) ** 5.2) * 25)
 
     def lvl_up(self):
         self.xp = self.xp - self.next_lvl()
