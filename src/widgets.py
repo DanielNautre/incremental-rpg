@@ -11,6 +11,8 @@ from PyQt5.QtCore import Qt
 from gear import get_available_gear, remove_gear
 from skills import get_available_skills
 
+from action import get_action
+
 
 def s_to_string(s):
     if s > 31535999:
@@ -90,6 +92,7 @@ class ProgressionWidget(QWidget):
 
         vbox = QVBoxLayout()
         hbox = QHBoxLayout()
+        action_h_box = QHBoxLayout()
 
         self.bar_xp = QProgressBar()
         self.bar_xp.setMinimum(0)
@@ -104,14 +107,19 @@ class ProgressionWidget(QWidget):
         self.lbl_skills_points = QLabel('')
         self.lbl_skills_points.setFont(QFont('Helvetica', 20))
 
-        self.lbl_gold = QLabel('Gold: {gold}'.format(gold=0))
+        #self.lbl_gold = QLabel('Gold: {gold}'.format(gold=0))
+        self.lbl_action = QLabel()
 
         hbox.addWidget(self.lbl_lvl)
         hbox.addWidget(self.bar_xp)
         hbox.addWidget(self.lbl_skills_points)
 
+        #vbox.addWidget(self.lbl_gold)
+        action_h_box.addStretch()
+        action_h_box.addWidget(self.lbl_action)
+
         vbox.addLayout(hbox)
-        vbox.addWidget(self.lbl_gold)
+        vbox.addLayout(action_h_box)
 
         self.setLayout(vbox)
 
@@ -130,7 +138,11 @@ class ProgressionWidget(QWidget):
             self.lbl_skills_points.setText('')
             self.lbl_skills_points.setToolTip('')
 
-        self.lbl_gold.setText('Gold: {gold:.1f}'.format(gold=var.gold))
+        #self.lbl_gold.setText('Gold: {gold:.1f}'.format(gold=var.gold))
+
+    def update_action(self, var):
+        if not var.timestamp % 20:
+            self.lbl_action.setText(get_action(var.lvl, var.weapon['name']))
 
 
 class EquippedGearWidget(QWidget):

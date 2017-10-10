@@ -149,11 +149,10 @@ class Game(object):
         self.equipped_gear_widget.update(self.var)
 
     def run_loop(self):
-
-        self.var.tick()
-
+        # update action
+        self.progress_widget.update_action(self.var)
         # progress
-
+        self.var.tick()
         # lvl up
         if self.var.xp >= self.var.next_lvl():
             self.var.lvl_up()
