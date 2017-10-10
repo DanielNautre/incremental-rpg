@@ -21,6 +21,8 @@ gear = {
     'Leather Doublet': {'type': 'torso', 'lvl': 2, 'price': 570, 'armor': 3.4, 'tt': 'Let\'s just hope they won\'t target your arms'},
     'Leather Hood': {'type': 'head', 'lvl': 2, 'price': 600, 'armor': 2.7, 'tt': 'It did come with an orange ball to protect your mouth, but it\'s not really practical'},
     'Short Sword': {'type': 'weapon', 'subtype': 'sword', 'lvl': 3, 'price': 1070, 'damage': 2.7, 'speed': 1.4, 'tt': 'A fine steel weapon'},
+    'Coif': {'type': 'head', 'lvl': 3, 'price': 1250, 'armor': 3.5, 'tt': 'How do you even pronounce that ?'},
+    'Brigandine Coat': {'type': 'torso', 'lvl': 3, 'price': 1450, 'armor': 4.5, 'tt': 'You\'re looking swell ! what\'s that smell ?'},
     'Morning Star': {'type': 'weapon', 'subtype': 'mace', 'lvl': 3, 'price': 1970, 'damage': 4.2, 'speed': 1.2, 'tt': 'For the early bird'},
     'Targe Shield': {'type': 'offhand', 'lvl': 3, 'price': 2130, 'armor': 3, 'tt': 'Don\'t get a splinter'},
     'Flail': {'type': 'weapon', 'subtype': 'flail', 'lvl': 4, 'price': 2700, 'damage': 5, 'speed': 1.3, 'tt': 'Careful now, don\'t hurt yourself'},
