@@ -228,6 +228,9 @@ class BuyGearWidget(QWidget):
         x, y = (0, 0)
 
         for name, g in gear.items():
+            if 'offhand' in g['type'] and '2h' in var.weapon['subtype']:
+                # don't display shields if 2 hand weapon is equipped
+                continue
             self.grid.addWidget(GearButtonWidget(name, g, var), y, x)
             self.grid.setAlignment(Qt.AlignLeft)
             x += 1
